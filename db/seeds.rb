@@ -25,10 +25,9 @@ card_data.each do |set|
         item["common_locations"].each do |location|
             l = Location.find_or_create_by(name: location)
             item_card.locations << l
-            item_card.save
         end
     else
-        puts "#{item["name"]} does not have a location set."
+        puts "#{item["name"]} - does not have a location set."
     end
    end
 end
@@ -46,10 +45,9 @@ settings = [
 User.all.each do |user|
     2.times do 
         config = settings.sample
-        num_cards = config[:cards]
-        best_case_moves = num_cards / 2
+        num_cards = config[:cards] / 2
         wrong_moves = rand(0...10)
-        total_moves = best_case_moves + wrong_moves
+        total_moves = num_cards + wrong_moves
         total_time = 1.5 * total_moves
 
         game = Game.create(
