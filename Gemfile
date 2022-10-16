@@ -50,3 +50,8 @@ group :test do
   gem "rspec", "~> 3.10"
   gem "rspec-json_expectations", "~> 2.2"
 end
+gem "httparty", "~> 0.20.0"
+
+gem "faker", "~> 2.23"
+
+gem "awesome_print", "~> 1.9"
