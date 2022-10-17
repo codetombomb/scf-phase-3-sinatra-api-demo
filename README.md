@@ -1,9 +1,6 @@
-## Creating the controllers
+## Creating the login functionality
 
-- The `ApplicationController` is where we will add controller functionality that will be shared throughout the other controllers. 
-- Write separate controllers to handle `CRUD` actions for each model (separation of concerns).
-- When creating a new controller, we need to:
-    - Create the file - use a naming convention that pluralizes the model name (ex: `users_controller.rb`)
-    - Create the Ruby `class` - matching the naming of the file (ex: `class UsersController`)
-    - Make sure that the controller that you just created is inheriting functionality from the base ApplicationController (ex: `class UsersController < ApplicationController`)
-    - Tell the Sinatra app to use the new controller by adding it to the `config.ru` file (ex: use UsersController) after the `run ApplicationController` line.
+- Enable sessions in the ApplicationController - `enable :sessions`
+- Create a Sessions Controller to handle login. This controller will handle '/login' and '/logout' functionality.
+- Since the User's `post` to `"/users"` is creating or signing up a user, we can direct our form data from the front end to this action. Let's rename this route to `"/signup"`
+- 

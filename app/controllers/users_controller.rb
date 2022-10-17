@@ -5,8 +5,18 @@ class UsersController < ApplicationController
         users.to_json(:only => [:username, :email], :include => :games )
     end
 
-    post '/users' do 
-        user = User.create(params)
+    get '/me' do
+        user = User.find_by(id: session[:user_id])
+        if user
+            user.to_json(:only => [:username, :email], :include => :games )
+        else
+            { errors: ["User is not logged in"] }.to_json
+        end
+    end 
+
+    post '/signup' do 
+        user = User.create(user_params)
+        session[:user_id] = user.id
         user.to_json(:include => :games)
     end
 
@@ -35,7 +45,9 @@ class UsersController < ApplicationController
 
     def user_params
         permitted = ["username", "password", "email", "id"]
-        params["id"] = params["id"].to_i
+        if params["id"]
+            params["id"] = params["id"].to_i
+        end
         params.filter {|param| permitted.include?(param)}
     end
 
